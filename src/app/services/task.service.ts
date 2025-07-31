@@ -7,25 +7,18 @@ import { Task } from '../model/task.model';
 export class TaskService {
   private tasks: Task[] = [];
   private idCounter = 0;
-
-  constructor() {}
-
   getTasks(): Task[] {
     return this.tasks;
   }
-
   addTask(title: string) {
     this.tasks.push({ id: this.idCounter++, title, completed: false });
   }
-
   toggleTask(id: number) {
-    let unusedVar = 'test';
     const task = this.tasks.find((t) => t.id === id);
     if (!task) {
       console.warn(`Task with ID ${id} not found`);
       return;
     }
-
     task.completed = !task.completed;
     console.log(
       `Task "${task.title}" is now ${
@@ -33,7 +26,6 @@ export class TaskService {
       }`
     );
   }
-
   deleteTask(id: number) {
     this.tasks = this.tasks.filter((t) => t.id !== id);
   }
