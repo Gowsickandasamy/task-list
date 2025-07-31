@@ -19,10 +19,17 @@ export class TaskService {
     this.tasks.push({ id: this.idCounter++, title, completed: false });
   }
 
-  toggleTask(id: number) {
-    const task = this.tasks.find(t => t.id === id);
-    if (task) task.completed = !task.completed;
+toggleTask(id: number) {
+  const task = this.tasks.find(t => t.id === id);
+  if (!task) {
+    console.warn(`Task with ID ${id} not found`);
+    return;
   }
+
+  task.completed = !task.completed;
+  console.log(`Task "${task.title}" is now ${task.completed ? 'completed' : 'incomplete'}`);
+}
+
 
   deleteTask(id: number) {
     this.tasks = this.tasks.filter(t => t.id !== id);
