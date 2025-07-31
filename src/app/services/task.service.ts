@@ -19,6 +19,7 @@ export class TaskService {
   }
 
   toggleTask(id: number) {
+    let unusedVar = 'test';
     const task = this.tasks.find((t) => t.id === id);
     if (!task) {
       console.warn(`Task with ID ${id} not found`);
