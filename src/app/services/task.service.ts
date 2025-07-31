@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { Task } from '../model/task.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TaskService {
+  private tasks: Task[] = [];
+  private idCounter = 0;
 
-  private tasks:Task[]=[];
-  private idCounter= 0;
-
-  constructor() { }
+  constructor() {}
 
   getTasks(): Task[] {
     return this.tasks;
@@ -19,19 +18,22 @@ export class TaskService {
     this.tasks.push({ id: this.idCounter++, title, completed: false });
   }
 
-toggleTask(id: number) {
-  const task = this.tasks.find(t => t.id === id);
-  if (!task) {
-    console.warn(`Task with ID ${id} not found`);
-    return;
+  toggleTask(id: number) {
+    const task = this.tasks.find((t) => t.id === id);
+    if (!task) {
+      console.warn(`Task with ID ${id} not found`);
+      return;
+    }
+
+    task.completed = !task.completed;
+    console.log(
+      `Task "${task.title}" is now ${
+        task.completed ? 'completed' : 'incomplete'
+      }`
+    );
   }
 
-  task.completed = !task.completed;
-  console.log(`Task "${task.title}" is now ${task.completed ? 'completed' : 'incomplete'}`);
-}
-
-
   deleteTask(id: number) {
-    this.tasks = this.tasks.filter(t => t.id !== id);
+    this.tasks = this.tasks.filter((t) => t.id !== id);
   }
 }
