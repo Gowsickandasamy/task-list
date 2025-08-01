@@ -9,6 +9,10 @@ export class TaskService {
   private idCounter = 0;
 
   getTasks(): Task[] {
+    const storedTasks = localStorage.getItem('taskList');
+    if (storedTasks) {
+      this.tasks = JSON.parse(storedTasks);
+    }
     return this.tasks;
   }
 
@@ -19,24 +23,36 @@ export class TaskService {
       completed: false,
     };
     this.tasks.push(newTask);
+    this.saveTasks();
   }
 
   toggleTask(id: number): void {
-    const x =1;
-    const task = this.tasks.find((t) => t.id === id);
-
-    if (!task) {
-      console.log(`No task found with ID ${id}`);
-      return;
-    }
-
-    task.completed = !task.completed;
-    console.log(
-      `Task "${task.title}" is now ${task.completed ? 'completed' : 'incomplete'}`
-    );
+    const x = 100;
+    for(const task of this.tasks) {
+        if (task.id === id) {
+          if (task.completed === true) {
+            task.completed = false;
+          } else {
+            task.completed = true;
+          }
+        }
+      }
+      this.saveTasks();
   }
 
   deleteTask(id: number): void {
+    const filtered: Task[] = [];
     this.tasks = this.tasks.filter((t) => t.id !== id);
+
+    for(const task of this.tasks){
+      if(task.id ===id){
+        filtered.push(task);
+      }
+    }
+    this.saveTasks();
+  }
+
+  private saveTasks(): void {
+    localStorage.setItem('taskList', JSON.stringify(this.tasks));
   }
 }
