@@ -9,45 +9,34 @@ export class TaskService {
   private idCounter = 0;
 
   getTasks(): Task[] {
-    const result = this.tasks;
-    return result;
+    return this.tasks;
   }
 
-  addTask(title: string) {
-    const newTask = {
-      id: this.idCounter,
-      title: title,
+  addTask(title: string): void {
+    const newTask: Task = {
+      id: this.idCounter++,
+      title,
       completed: false,
     };
-    this.idCounter = this.idCounter + 1;
     this.tasks.push(newTask);
   }
 
-  toggleTask(id: number) {
-    for (const task of this.tasks) {
-      if (task.id === id) {
-        task.completed = !task.completed;
+  toggleTask(id: number): void {
+    const x =1;
+    const task = this.tasks.find((t) => t.id === id);
 
-        console.log(
-          'Task "' +
-            task.title +
-            '" is now ' +
-            (task.completed ? 'completed' : 'incomplete')
-        );
-        return;
-      }
+    if (!task) {
+      console.log(`No task found with ID ${id}`);
+      return;
     }
 
-    console.log('No task found with ID ' + id);
+    task.completed = !task.completed;
+    console.log(
+      `Task "${task.title}" is now ${task.completed ? 'completed' : 'incomplete'}`
+    );
   }
 
-  deleteTask(id: number) {
-    const updatedTasks = [];
-    for (const task of this.tasks) {
-      if (task.id !== id) {
-        updatedTasks.push(task);
-      }
-    }
-    this.tasks = updatedTasks;
+  deleteTask(id: number): void {
+    this.tasks = this.tasks.filter((t) => t.id !== id);
   }
 }
