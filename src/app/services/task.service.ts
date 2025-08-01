@@ -29,4 +29,22 @@ export class TaskService {
   deleteTask(id: number) {
     this.tasks = this.tasks.filter((t) => t.id !== id);
   }
+
+  getIncompleteTasks() {
+    const result:Task[] = [];
+    for (const task of this.tasks) {
+    if (!task.completed) {
+      result.push(task);
+    }
+  }
+    return result;
+  }
+
+  markAsCompleted(taskId:number){
+    for(const task of this.tasks){
+      if(task.id===taskId){
+        task.completed=true
+      }
+    }
+  }
 }
