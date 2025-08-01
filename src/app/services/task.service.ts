@@ -7,44 +7,47 @@ import { Task } from '../model/task.model';
 export class TaskService {
   private tasks: Task[] = [];
   private idCounter = 0;
-  getTasks(): Task[] {
-    return this.tasks;
-  }
-  addTask(title: string) {
-    this.tasks.push({ id: this.idCounter++, title, completed: false });
-  }
-  toggleTask(id: number) {
-    const task = this.tasks.find((t) => t.id === id);
-    if (!task) {
-      console.warn(`Task with ID ${id} not found`);
-      return;
-    }
-    task.completed = !task.completed;
-    console.log(
-      `Task "${task.title}" is now ${
-        task.completed ? 'completed' : 'incomplete'
-      }`
-    );
-  }
-  deleteTask(id: number) {
-    this.tasks = this.tasks.filter((t) => t.id !== id);
-  }
 
-  getIncompleteTasks() {
-    const result:Task[] = [];
-    for (const task of this.tasks) {
-    if (!task.completed) {
-      result.push(task);
-    }
-  }
+  getTasks(): Task[] {
+    const result = this.tasks;
     return result;
   }
 
-  markAsCompleted(taskId:number){
-    for(const task of this.tasks){
-      if(task.id===taskId){
-        task.completed=true
+  addTask(title: string) {
+    const newTask = {
+      id: this.idCounter,
+      title: title,
+      completed: false,
+    };
+    this.idCounter = this.idCounter + 1;
+    this.tasks.push(newTask);
+  }
+
+  toggleTask(id: number) {
+    for (const task of this.tasks) {
+      if (task.id === id) {
+        task.completed = !task.completed;
+
+        console.log(
+          'Task "' +
+            task.title +
+            '" is now ' +
+            (task.completed ? 'completed' : 'incomplete')
+        );
+        return;
       }
     }
+
+    console.log('No task found with ID ' + id);
+  }
+
+  deleteTask(id: number) {
+    const updatedTasks = [];
+    for (const task of this.tasks) {
+      if (task.id !== id) {
+        updatedTasks.push(task);
+      }
+    }
+    this.tasks = updatedTasks;
   }
 }
