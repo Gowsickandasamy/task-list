@@ -1,3 +1,8 @@
-.completed {
-  text-decoration: line-through;
+.add-task-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.add-task-form .input-group {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 4px;
 }
