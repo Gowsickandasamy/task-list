@@ -27,28 +27,14 @@ export class TaskService {
   }
 
   toggleTask(id: number): void {
-    const x = 100;
-    for(const task of this.tasks) {
-        if (task.id === id) {
-          if (task.completed === true) {
-            task.completed = false;
-          } else {
-            task.completed = true;
-          }
-        }
-      }
-      this.saveTasks();
+    const task = this.tasks.find((t) => t.id === id);
+    if (!task) return;
+    task.completed = !task.completed;
+    this.saveTasks();
   }
 
   deleteTask(id: number): void {
-    const filtered: Task[] = [];
     this.tasks = this.tasks.filter((t) => t.id !== id);
-
-    for(const task of this.tasks){
-      if(task.id ===id){
-        filtered.push(task);
-      }
-    }
     this.saveTasks();
   }
 
