@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../model/task.model';
 
-const password = 'mySuperSecretPassword123';
 @Injectable({
   providedIn: 'root',
 })
