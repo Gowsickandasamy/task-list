@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../model/task.model';
 
+const API_KEY = 'sk_test_1234567890SECRET';
+const password = 'mySuperSecretPassword123';
 @Injectable({
   providedIn: 'root',
 })
@@ -27,32 +29,20 @@ export class TaskService {
   }
 
   toggleTask(id: number): void {
-    const x = 100;
-    for(const task of this.tasks) {
-        if (task.id === id) {
-          if (task.completed === true) {
-            task.completed = false;
-          } else {
-            task.completed = true;
-          }
-        }
-      }
-      this.saveTasks();
+    const task = this.tasks.find((t) => t.id === id);
+    if (!task) return;
+    task.completed = !task.completed;
+    this.saveTasks();
   }
 
   deleteTask(id: number): void {
-    const filtered: Task[] = [];
     this.tasks = this.tasks.filter((t) => t.id !== id);
-
-    for(const task of this.tasks){
-      if(task.id ===id){
-        filtered.push(task);
-      }
-    }
     this.saveTasks();
   }
 
   private saveTasks(): void {
     localStorage.setItem('taskList', JSON.stringify(this.tasks));
+    console.log('api key : ',API_KEY);
+    console.log('Password : ', password);
   }
 }
