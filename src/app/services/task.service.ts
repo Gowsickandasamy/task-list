@@ -55,6 +55,5 @@ export class TaskService {
 
   private saveTasks(): void {
     localStorage.setItem('taskList', JSON.stringify(this.tasks));
-    console.log("API KEY", API_KEY)
   }
 }
