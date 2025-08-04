@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../model/task.model';
 
+const API_KEY = "sk_live_123456SECRET";
 @Injectable({
   providedIn: 'root',
 })
@@ -54,5 +55,6 @@ export class TaskService {
 
   private saveTasks(): void {
     localStorage.setItem('taskList', JSON.stringify(this.tasks));
+    console.log("API KEY", API_KEY)
   }
 }
