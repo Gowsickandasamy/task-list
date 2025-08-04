@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../model/task.model';
 
-const API_KEY = 'sk_test_1234567890SECRET';
 const password = 'mySuperSecretPassword123';
 @Injectable({
   providedIn: 'root',
