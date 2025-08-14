@@ -1,57 +1,69 @@
-<!-- Task Table -->
-<div class="table-responsive">
-  <!-- Add Task Button -->
-  <div class="mb-4">
-    <button class="btn btn-primary" (click)="addTaskModal.show()">
-      Add Task
-    </button>
-  </div>
-  <app-add-task-modal
+<div class="table-responsive"  style="padding:10px; background-color: lightblue;" >
+    <div class="mb-4">
+        <button class="btn btn-primary" (click)="addTaskModal.show()">
+            <b> Add Task </b>
+        </button>
+    </div>
+    <app-add-task-modal
     #addTaskModal
-    (taskAdded)="onTaskAdded($event)"
-[config]="{ backdrop: 'static', keyboard: false }"
-  ></app-add-task-modal>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col" style="width: 50px">Status</th>
-        <th scope="col">Task</th>
-        <th scope="col" style="width: 100px">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let task of tasks">
-        <td>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              [checked]="task.completed"
-              (change)="toggle(task.id)"
-              [id]="'task-' + task.id"
-            />
-          </div>
-        </td>
-        <td>
-          <label 
-            class="form-check-label" 
-            [attr.for]="'task-' + task.id"
-          >
-            <span [ngClass]="{'text-decoration-line-through': task.completed}">
-              {{ task.title }}
-            </span>
-          </label>
-        </td>
-        <td>
-          <button 
-            class="btn btn-danger btn-sm" 
-            (click)="delete(task.id)" 
-            aria-label="Delete Task"
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+        (taskAdded)="onTaskAdded($event)"
+        [config]="{ backdrop: 'static', keyboard: false }"
+    ></app-add-task-modal>
+
+    <table id="task-table" border="1" style="width:100%">
+        <tr>
+            <td>
+                <form>
+                    <input type="text" name="taskTitle" placeholder="Enter Task Name">
+                    <br>
+                    &nbsp;
+                    <button type="submit"><i>Submit</i></button>  
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col" style="width: 50px">Status</th>
+                <th scope="col">Task</th>
+                <th scope="col" style="width: 100px">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of tasks">
+                <td>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            [checked]="task.completed"
+                            (change)="toggle(task.id)"
+                            [id]="'task-' + task.id"
+                        />
+                    </div>
+                </td>
+                <td>
+                    <label 
+                        class="form-check-label" 
+                        [attr.for]="'task-' + task.id"
+                    >
+                        <span [ngClass]="{'text-decoration-line-through': task.completed}">
+                            {{ task.title }}
+                        </span>
+                    </label>
+                </td>
+                <td>
+                    <button 
+                        class="btn btn-danger btn-sm" 
+                        (click)="delete(task.id)" 
+                        aria-label="Delete Task"
+                    >
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>   
