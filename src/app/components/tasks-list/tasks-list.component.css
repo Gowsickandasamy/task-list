@@ -7,20 +7,20 @@
 }
 
 #task-table {
-    background: yellow;
-    border: 2px solid red;
+    background: yellow !important;
+    border: 2px solid red !important;
 }
 
 .left {
-    float: left;
-    width: 50%;
+    float: left !important;
+    width: 50% !important;
 }
 
 .table {
-    border-collapse: separate;
-    border-spacing: 0px 6px;
+    border-collapse: separate !important;
+    border-spacing: 0px 6px !important;
 }
 
-   .completed-task    {   color: gray;   font-style: italic;   }   
+   .completed-task    {   color: gray !important;   font-style: italic !important;   }   
 
 .table-hover tbody tr:hover {background-color: #f1f3f5 !important;}
