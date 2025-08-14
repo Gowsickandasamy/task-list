@@ -1,8 +1,26 @@
-.add-task-form {
-  max-width: 600px;
-  margin: 0 auto;
+.table-responsive {margin-top: 20px;
+        padding: 5px;    }
+
+.mb-4 .btn {
+    padding: 8px 16px !important;
+    font-size: 14px !important;
 }
-.add-task-form .input-group {
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  border-radius: 4px;
+
+#task-table {
+    background: yellow;
+    border: 2px solid red;
 }
+
+.left {
+    float: left;
+    width: 50%;
+}
+
+.table {
+    border-collapse: separate;
+    border-spacing: 0px 6px;
+}
+
+   .completed-task    {   color: gray;   font-style: italic;   }   
+
+.table-hover tbody tr:hover {background-color: #f1f3f5 !important;}
